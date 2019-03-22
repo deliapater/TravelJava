@@ -8,6 +8,7 @@ public enum PlaneType {
     private final int totalWeight;
     private final int capacity;
 
+
     PlaneType(int totalWeight, int capacity){
         this.totalWeight = totalWeight;
         this.capacity = capacity;
@@ -20,4 +21,5 @@ public enum PlaneType {
     public int getCapacity() {
         return capacity;
     }
+
 }
