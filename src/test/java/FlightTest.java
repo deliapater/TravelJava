@@ -74,5 +74,5 @@ public class FlightTest {
         flight.addPassenger(passenger);
         assertEquals(3, flight.countPassengers());
     }
-    
+
 }
