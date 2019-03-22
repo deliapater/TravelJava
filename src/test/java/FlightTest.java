@@ -1,16 +1,25 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
+
 
 public class FlightTest {
 
-    Flight flight;
-    Passenger passenger;
+    private Flight flight;
+    private Passenger passenger;
+    private Date departureTime;
+    private SimpleDateFormat format;
 
     @Before
-    public void setUp(){
-        flight = new Flight(PlaneType.BOEING777, "FR756", Airport.GLA, Airport.LHR, "08:00", 3);
+    public void setUp() throws ParseException {
+            format = new SimpleDateFormat("HH:mm:ss");
+            departureTime = format.parse("08:00:00");
+        flight = new Flight(PlaneType.BOEING777, "FR756", Airport.GLA, Airport.LHR, departureTime, 3);
         passenger = new Passenger("Frankie", 1);
     }
 
@@ -21,7 +30,7 @@ public class FlightTest {
 
     @Test
     public void hasDepertureTime(){
-        assertEquals("08:00", flight.getDepatureTime());
+        assertEquals("08:00:00", format.format(flight.getDepatureTime() ));
     }
 
     @Test
@@ -65,4 +74,5 @@ public class FlightTest {
         flight.addPassenger(passenger);
         assertEquals(3, flight.countPassengers());
     }
+    
 }
