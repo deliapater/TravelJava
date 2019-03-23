@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 
 public class FlightTest {
 
-    private Flight flight;
     private Passenger passenger;
+    private Flight flight;
     private Date departureTime;
     private SimpleDateFormat format;
 
@@ -19,8 +19,9 @@ public class FlightTest {
     public void setUp() throws ParseException {
             format = new SimpleDateFormat("HH:mm:ss");
             departureTime = format.parse("08:00:00");
-        flight = new Flight(PlaneType.BOEING777, "FR756", Airport.GLA, Airport.LHR, departureTime, 3);
-        passenger = new Passenger("Frankie", 1);
+            passenger = new Passenger("Frankie", 1);
+            flight = new Flight(PlaneType.BOEING777, "FR756", Airport.GLA, Airport.LHR, departureTime, 3);
+
     }
 
     @Test
@@ -50,7 +51,7 @@ public class FlightTest {
 
     @Test
     public void hasAvailableSeats(){
-        assertEquals(396, flight.getCapacity());
+        assertEquals(3, flight.getAvailableSeats());
     }
 
     @Test
@@ -74,5 +75,24 @@ public class FlightTest {
         flight.addPassenger(passenger);
         assertEquals(3, flight.countPassengers());
     }
+
+    @Test
+    public void canGetTotalBaggageWeight(){
+        flight.addPassenger(passenger);
+        flight.addPassenger(passenger);
+        assertEquals(40, flight.getTotalBaggageWeight());
+    }
+
+    @Test
+    public void startsWithNoAllocatedSeats(){
+        assertEquals(0, flight.getAllocatedSeats().size());
+    }
+
+//    @Test
+//    public void flightCanAllocatedSeats(){
+//        flight.addPassenger(passenger);
+//        assertEquals(1, flight.getAllocatedSeats().size());
+//    }
+
 
 }

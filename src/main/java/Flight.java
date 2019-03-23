@@ -1,3 +1,5 @@
+import javafx.scene.shape.Arc;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,6 +12,8 @@ public class Flight {
     private  Airport departure;
     private Date depatureTime;
     private int availableSeats;
+    private ArrayList<Integer> allocatedSeats;
+
 
     public Flight(PlaneType planeType, String flightNo, Airport destination, Airport departure, Date departureTime, int availableSeats){
         this.passengers = new ArrayList<Passenger>();
@@ -19,6 +23,7 @@ public class Flight {
         this.departure = departure;
         this.depatureTime = departureTime;
         this.availableSeats = availableSeats;
+        this.allocatedSeats = new ArrayList<Integer>();
     }
 
     public ArrayList<Passenger> getPassengers() {
@@ -70,8 +75,26 @@ public class Flight {
         }
     }
 
-//    public void setDepatureTime(String newTime){
-//        this.depatureTime = newTime;
-//    }
+    public int generateRandomSeat(){
+        int min = 1;
+        int max = this.planeType.getCapacity();
+        int randomNo;
+        do {
+            randomNo = min + (int)(Math.random() * ((max - min) + 1) );
+        } while (this.allocatedSeats.add(randomNo));
 
+        return randomNo;
+    }
+
+    public int getTotalBaggageWeight() {
+    int totalBaggage = 0;
+    for(Passenger passenger : this.passengers){
+        totalBaggage += passenger.getNoBags();
+    }
+    return totalBaggage * 20;
+    }
+
+    public ArrayList<Integer> getAllocatedSeats() {
+        return this.allocatedSeats;
+    }
 }

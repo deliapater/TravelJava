@@ -35,4 +35,6 @@ public class Passenger {
     public void setFlight(Flight flight) {
         this.flight = flight;
     }
+
+
 }
